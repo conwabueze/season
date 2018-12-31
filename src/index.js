@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
 
 class App extends React.Component{
     //every class needs a constructor
@@ -11,17 +12,17 @@ class App extends React.Component{
             errorMessage: null
         };
 
+        
+    }
+
+    componentDidMount(){
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({lat: position.coords.latitude});
-            },
-            (err) => {
-                this.setState({errorMessage: err.message});
-            }
-    
+            (position) => this.setState({lat: position.coords.latitude}),
+            (err) => this.setState({errorMessage: err.message})
         );
     }
 
+   
     //we have to define render in class based components
     render(){
         if(this.state.errorMessage && !this.state.lat){
